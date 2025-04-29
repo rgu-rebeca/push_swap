@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_big2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 00:33:27 by rgu               #+#    #+#             */
+/*   Updated: 2025/04/30 00:33:27 by rgu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(int *a, int *b)
@@ -10,7 +22,7 @@ void	swap(int *a, int *b)
 	return ;
 }
 
-int	partition(int arr[], int low, int high)
+int	partition(int *arr, int low, int high)
 {
 	int	pivot;
 	int	i;
@@ -32,7 +44,7 @@ int	partition(int arr[], int low, int high)
 	return (i);
 }
 
-void	quick_sort(int arr[], int low, int high)
+void	quick_sort(int *arr, int low, int high)
 {
 	int	partition_index;
 
@@ -57,25 +69,20 @@ void	copy_and_sort(int *arr, int *sorted, int size)
 	quick_sort(sorted, 0, size - 1);
 }
 
-void	normalize_stack(t_stack *a, int *sorted)
+void	calculate_index(t_stack *a, int *sorted)
 {
 	int		j;
 	t_node	*node;
 
-	j = 0;
+	if (!a || !sorted)
+		return ;
 	node = a->top;
 	while (node)
 	{
 		j = 0;
-		while (j < a->size)
-		{
-			if (node->value == sorted[j])
-			{
-				node->value = j;
-				break ;
-			}
+		while (node->value != sorted[j])
 			j++;
-		}
+		node->index = j;
 		node = node->next;
 	}
 }

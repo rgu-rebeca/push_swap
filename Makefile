@@ -10,7 +10,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 SRCS	= src/init_stack.c src/operations.c src/operation2.c \
 			src/push_swap.c src/sort_big.c src/sort_small.c \
-			src/utils.c src/check_is_valid.c src/main.c src/sort_big2.c
+			src/utils.c src/check_is_valid.c src/sort_big2.c
 OBJS	= $(SRCS:src/%.c=obj/%.o)
 INCLUDE = -I include
 all: $(NAME)

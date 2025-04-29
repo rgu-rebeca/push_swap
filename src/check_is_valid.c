@@ -1,41 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_is_valid.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 00:32:44 by rgu               #+#    #+#             */
+/*   Updated: 2025/04/30 01:04:13 by rgu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
-
-static long	ft_strtol(const char *str, char **endptr, int base)
-{
-	long	num;
-	int		sign;
-
-	sign = 1;
-	num = 0;
-	while ((*str >= 9 && *str <= 13) || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		num = num * base + (*str - '0');
-		if (num > INT_MAX)
-			return (sign * INT_MIN);
-		str++;
-	}
-	if (endptr)
-		*endptr = (char *)str;
-	return (num * sign);
-}
 
 static int	check_is_int_range(char *str)
 {
 	long	num;
-	char	*end_ptr;
 
-	num = ft_strtol(str, &end_ptr, 10);
-	if (*end_ptr != '\0')
-		return (0);
+	num = ft_strtol(str, 10);
 	if (num < INT_MIN || num > INT_MAX)
 		return (0);
 	return (1);
@@ -81,31 +63,57 @@ static int	check_duplicate(int count, char **value)
 	return (1);
 }
 
-int	check_is_valid(int argc, char **argv)
+int	check_is_valid_aux(char **numbers)
 {
-	char	**numbers;
-	int		count;
+	int	i;
+	int	count;
 
 	count = 0;
-	if (argc == 2)
-	{
-		numbers = ft_split(argv[1], ' ');
-		if (!numbers)
-			return (0);
-		while (numbers[count])
-			count++;
-	}
-	else
-	{
-		count = argc - 1;
-		numbers = argv;
-	}
-	while (count >= 1)
+	while (numbers[count])
+		count++;
+	i = count;
+	while (--count >= 0)
 	{
 		if (!check_is_int(numbers[count])
 			|| !check_is_int_range(numbers[count]))
+		{
+			free_memory(i, numbers);
 			return (0);
-		count--;
+		}
 	}
-	return (check_duplicate(count, numbers));
+	if (check_duplicate(i, numbers) == 0)
+	{
+		free_memory(i, numbers);
+		return (0);
+	}
+	free_memory(i, numbers);
+	return (1);
+}
+
+int	check_is_valid(int argc, char **argv)
+{
+	char	**numbers;
+	int		a;
+
+	a = 0;
+	if (argc == 2)
+		numbers = ft_split(argv[1], ' ');
+	else
+	{
+		numbers = malloc((argc - 1) * sizeof(char *));
+		if (!numbers)
+			return (0);
+		while (a < argc - 1)
+		{
+			numbers[a] = ft_strdup(argv[a + 1]);
+			if (!numbers[a])
+				return (free_memory(a, numbers), 0);
+			a++;
+		}
+	}
+	if (!numbers)
+		return (0);
+	if (!check_is_valid_aux(numbers))
+		return (0);
+	return (1);
 }

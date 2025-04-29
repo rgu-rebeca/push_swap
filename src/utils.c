@@ -1,27 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 00:33:38 by rgu               #+#    #+#             */
+/*   Updated: 2025/04/30 01:02:40 by rgu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
-
-/*static int	*lst_to_arr(t_stack *stack)
-{
-	t_node	*node;
-	int		size;
-	int		*arr;
-	int		t;
-
-	if (!stack || !stack->top)
-	size = stack->size;
-	node = stack->top;
-	t = 0;
-	arr = (int *)malloc(sizeof(int) * size);
-	if(!arr)
-		return (NULL);
-	while(t < size)
-	{
-		arr[t++] = node->value;
-		node = node->next;
-	}
-	return (arr);
-}*/
 
 int	check_is_sorted(t_stack *a)
 {
@@ -39,19 +29,64 @@ int	check_is_sorted(t_stack *a)
 	return (1);
 }
 
-void	free_stack(t_stack *stack)
+int	count_r(t_stack *stack, int target_index)
 {
-	t_node	*node;
-	t_node	*temp;
+	t_node	*head;
+	int		count;
 
-	if (!stack || !stack->top)
-		return ;
-	node = stack->top;
-	while (node)
+	head = stack->top;
+	count = 0;
+	while (head)
 	{
-		temp = node->next;
-		free(node);
-		node = temp;
+		if (head->index == target_index)
+			break ;
+		count++;
+		head = head->next;
 	}
-	free(stack);
+	return (count);
+}
+
+int	ft_sqrt(int nb)
+{
+	int	i;
+
+	if (nb <= 0)
+		return (0);
+	i = 1;
+	while (i * i <= nb)
+		i++;
+	return (i - 1);
+}
+
+void	free_memory(int i, char **numbers)
+{
+	int	a;
+
+	a = 0;
+	while (a < i)
+		free(numbers[a++]);
+	free(numbers);
+}
+
+long	ft_strtol(const char *str, int base)
+{
+	long	num;
+	int		sign;
+
+	sign = 1;
+	num = 0;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		num = num * base + (*str - '0');
+		str++;
+	}
+	return (num * sign);
 }

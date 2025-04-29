@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 00:32:50 by rgu               #+#    #+#             */
+/*   Updated: 2025/04/30 00:32:51 by rgu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/push_swap.h"
 #include "../libft/libft.h"
 
@@ -35,7 +47,7 @@ t_stack	*create_stack(void)
 	return (stack);
 }
 
-t_stack	*init_stack_aux(char	**argv, t_stack *a)
+t_stack	*init_stack_aux(char **argv, t_stack *a)
 {
 	char	**numbers;
 	int		i;

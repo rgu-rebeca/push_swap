@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_big.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/30 00:33:22 by rgu               #+#    #+#             */
+/*   Updated: 2025/04/30 00:36:03 by rgu              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+#include <stdio.h>
 
 static void	preprocess_stack(t_stack *a)
 {
@@ -24,47 +37,62 @@ static void	preprocess_stack(t_stack *a)
 		i++;
 	}
 	copy_and_sort(arr, sorted, size);
-	normalize_stack(a, sorted);
+	calculate_index(a, sorted);
 	free(arr);
 	free(sorted);
 }
 
-static void	radix_sort_aux(t_stack *a, int bit, int max_bits, t_stack *b)
+void	big_sort1(t_stack *a, t_stack *b)
 {
-	int	count;
-	int	value;
+	int	i;
+	int	range;
+	int	size;
 
-	while (bit < max_bits)
+	size = a->size;
+	i = 0;
+	range = ft_sqrt(size) + 2;
+	while (a->top)
 	{
-		count = a->size;
-		while (count--)
+		if (a->top->index <= i)
 		{
-			value = a->top->value;
-			if ((value >> bit) & 1)
-				ra(a);
-			else
-				pb(a, b);
+			pb(a, b);
+			rb(b);
+			i++;
 		}
-		while (b->top)
-			pa(a, b);
-		bit++;
+		else if (a->top->index <= i + range)
+		{
+			pb(a, b);
+			i++;
+		}
+		else
+			ra(a);
 	}
 }
 
-static void	radix_sort(t_stack *a, t_stack *b)
+void	big_sort2(t_stack *a, t_stack *b)
 {
 	int	size;
-	int	max_bits;
-	int	bit;
+	int	rb_count;
+	int	rrb_count;
 
-	size = a->size;
-	if (size == 0)
-		return ;
-	max_bits = 0;
-	bit = 0;
-	while ((size - 1) >> max_bits)
-		max_bits++;
-	radix_sort_aux(a, bit, max_bits, b);
+	size = b->size;
+	while (size > 0)
+	{
+		rb_count = count_r(b, size - 1);
+		rrb_count = size - rb_count;
+		if (rb_count <= rrb_count)
+		{
+			while (b->top->index != size - 1)
+				rb(b);
+		}
+		else
+		{
+			while (b->top->index != size - 1)
+				rrb(b);
+		}
+		pa(a, b);
+		size--;
+	}
 }
 
 void	sort_big(t_stack *a, t_stack *b)
@@ -72,5 +100,6 @@ void	sort_big(t_stack *a, t_stack *b)
 	if (!a || !b)
 		return ;
 	preprocess_stack(a);
-	radix_sort (a, b);
+	big_sort1(a, b);
+	big_sort2(a, b);
 }
