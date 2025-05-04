@@ -6,12 +6,11 @@
 /*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:33:22 by rgu               #+#    #+#             */
-/*   Updated: 2025/04/30 00:36:03 by rgu              ###   ########.fr       */
+/*   Updated: 2025/05/04 13:12:53 by rgu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static void	preprocess_stack(t_stack *a)
 {
@@ -26,8 +25,8 @@ static void	preprocess_stack(t_stack *a)
 	size = a->size;
 	node = a->top;
 	i = 0;
-	arr = (int *)malloc(sizeof(int) * size);
-	sorted = (int *)malloc(sizeof(int) * size);
+	arr = malloc(sizeof(int) * size);
+	sorted = malloc(sizeof(int) * size);
 	if (!arr || !sorted)
 		return ;
 	while (node)

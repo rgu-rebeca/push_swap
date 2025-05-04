@@ -6,7 +6,7 @@
 /*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:32:44 by rgu               #+#    #+#             */
-/*   Updated: 2025/04/30 01:04:13 by rgu              ###   ########.fr       */
+/*   Updated: 2025/05/03 20:23:06 by rgu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	check_is_valid(int argc, char **argv)
 		numbers = ft_split(argv[1], ' ');
 	else
 	{
-		numbers = malloc((argc - 1) * sizeof(char *));
+		numbers = malloc((argc) * sizeof(char *));
 		if (!numbers)
 			return (0);
 		while (a < argc - 1)
@@ -110,6 +110,7 @@ int	check_is_valid(int argc, char **argv)
 				return (free_memory(a, numbers), 0);
 			a++;
 		}
+		numbers[a] = NULL;
 	}
 	if (!numbers)
 		return (0);

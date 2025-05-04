@@ -6,7 +6,7 @@
 /*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:32:50 by rgu               #+#    #+#             */
-/*   Updated: 2025/04/30 00:32:51 by rgu              ###   ########.fr       */
+/*   Updated: 2025/05/03 18:47:20 by rgu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	push(t_stack *stack, int num)
 	t_node	*new_node;
 	t_node	*current;
 
-	new_node = (t_node *)malloc(sizeof(t_node));
+	new_node = malloc(sizeof(t_node));
 	if (!new_node)
 		return ;
 	new_node->value = num;
@@ -39,7 +39,7 @@ t_stack	*create_stack(void)
 {
 	t_stack	*stack;
 
-	stack = (t_stack *)malloc(sizeof(t_stack));
+	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
 	stack -> top = NULL;

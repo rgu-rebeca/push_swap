@@ -6,13 +6,11 @@
 /*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:33:10 by rgu               #+#    #+#             */
-/*   Updated: 2025/04/30 00:33:11 by rgu              ###   ########.fr       */
+/*   Updated: 2025/05/03 18:51:48 by rgu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-#include <stdio.h>
 
 void	sa(t_stack *a)
 {
@@ -34,7 +32,7 @@ void	sb(t_stack *b)
 	t_node	*first;
 	t_node	*second;
 
-	if (!b)
+	if (!b || b->size < 2)
 		return ;
 	first = b->top;
 	second = b->top->next;

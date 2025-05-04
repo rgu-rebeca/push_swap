@@ -6,7 +6,7 @@
 /*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:33:32 by rgu               #+#    #+#             */
-/*   Updated: 2025/04/30 00:33:33 by rgu              ###   ########.fr       */
+/*   Updated: 2025/05/04 12:32:49 by rgu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	move_min_to_top(t_stack *a, int min_index)
 	}
 }
 
-static void	sort_4_or_5(t_stack *a, t_stack *b)
+static void	sort_less_than_16(t_stack *a, t_stack *b)
 {
 	int	min_index;
 
@@ -108,15 +108,15 @@ void	sort_small(t_stack *a, t_stack *b)
 	size = a->size;
 	if (size <= 1)
 		return ;
-	if (size == 2)
+	else if (size == 2)
 	{
 		if (a->top->value > a->top->next->value)
 			sa(a);
 	}
-	if (size == 3)
+	else if (size == 3)
 		sort_3(a);
-	if (size == 4 || size == 5)
-		sort_4_or_5(a, b);
+	else if (size <= 16)
+		sort_less_than_16(a, b);
 }
 
 /*void	print_list(t_stack *stack)

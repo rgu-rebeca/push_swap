@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/04 12:45:13 by rgu               #+#    #+#              #
+#    Updated: 2025/05/04 12:48:55 by rgu              ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 NAME	= push_swap
 LIBFT_DIR = libft
@@ -8,9 +20,7 @@ AR		= ar rcs
 RM		= rm -f
 SRC_DIR = src
 OBJ_DIR = obj
-SRCS	= src/init_stack.c src/operations.c src/operation2.c \
-			src/push_swap.c src/sort_big.c src/sort_small.c \
-			src/utils.c src/check_is_valid.c src/sort_big2.c
+SRCS	= $(wildcard src/*.c)
 OBJS	= $(SRCS:src/%.c=obj/%.o)
 INCLUDE = -I include
 all: $(NAME)

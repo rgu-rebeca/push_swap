@@ -6,7 +6,7 @@
 /*   By: rgu <rgu@student.42madrid.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 00:33:16 by rgu               #+#    #+#             */
-/*   Updated: 2025/04/30 00:45:09 by rgu              ###   ########.fr       */
+/*   Updated: 2025/05/04 12:32:32 by rgu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	push_swap(int argc, char **argv)
 		free_stack (a);
 		return ;
 	}
-	if (a->size <= 5)
+	if (a->size <= 16)
 		sort_small(a, b);
 	else
 		sort_big(a, b);
